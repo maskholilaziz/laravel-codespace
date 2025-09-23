@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - ..:/workspace:cached
+    working_dir: /workspace
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - appnet
+    command: sleep infinity
+
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "mysqladmin ping -h 127.0.0.1 -uroot -p$${MYSQL_ROOT_PASSWORD} || exit 1",
+        ]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+    networks:
+      - appnet
+
+volumes:
+  mysql-data:
+
+networks:
+  appnet:
