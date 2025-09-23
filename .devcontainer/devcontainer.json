@@ -1,25 +1,18 @@
 {
-  "name": "Laravel 12 + PHP 8.3",
+  "name": "Laravel 12 Codespace",
   "dockerComposeFile": "docker-compose.yml",
   "service": "app",
   "workspaceFolder": "/workspace",
   "remoteUser": "vscode",
   "forwardPorts": [8000, 5173, 3306],
-  "portsAttributes": {
-    "8000": { "label": "Laravel", "onAutoForward": "openBrowser" },
-    "5173": { "label": "Vite" },
-    "3306": { "label": "MySQL" }
-  },
-  "postCreateCommand": "bash .devcontainer/setup.sh",
+  "postCreateCommand": "composer install && cp .env.example .env && php artisan key:generate",
   "customizations": {
     "vscode": {
       "extensions": [
         "bmewburn.vscode-intelephense-client",
         "xdebug.php-debug",
-        "shufo.vscode-blade-formatter",
         "onecentlin.laravel-blade",
-        "amiralizadeh9480.laravel-extra-intellisense",
-        "mtxr.sqltools"
+        "amiralizadeh9480.laravel-extra-intellisense"
       ]
     }
   }
