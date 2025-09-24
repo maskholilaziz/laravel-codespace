@@ -1,9 +1,9 @@
 {
-  "name": "Laravel 12 Codespace",
+  "name": "Laravel 12 Alpine",
   "dockerComposeFile": "docker-compose.yml",
   "service": "app",
   "workspaceFolder": "/workspace",
-  "remoteUser": "vscode",
+  "remoteUser": "root",
   "forwardPorts": [8000, 5173, 3306],
   "postCreateCommand": "composer install && cp .env.example .env && php artisan key:generate",
   "customizations": {
