@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('cooking_profile', ['pemula', 'sibuk', 'hobi'])->nullable();
+            $table->string('profile_picture_url')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
